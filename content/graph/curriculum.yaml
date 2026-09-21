@@ -1,0 +1,509 @@
+nodes:
+  # === MATHEMATICS (CORE) ===
+  - id: M0.1
+    domain: math
+    title: "Logic & Quantifiers"
+    tier: 0
+    nodeType: foundation
+    prereqs: []
+    objectives:
+      - "Master propositional logic, truth tables, and equivalences"
+      - "Express mathematical claims rigorously using universal and existential quantifiers"
+      - "Negate complex quantified statements without logical leakage"
+    primer: "Logic is the operating system of formal mathematics. Before proving theorems, we must establish the syntax of truth: propositions, implications, and quantifiers (∀, ∃). A statement P => Q is false strictly when P is true and Q is false."
+    resources:
+      - title: "Book of Proof - Chapter 2: Logic"
+        url: "https://www.people.vcu.edu/~rhammack/BookOfProof/"
+        description: "Open textbook treatment of logical statements and quantifiers."
+        estMinutes: 25
+    hooks:
+      - "Why is (P => Q) logically equivalent to (¬P ∨ Q) in microprocessor circuit design?"
+    bridgeCandidates: [B-logic-circuits]
+
+  - id: M0.2
+    domain: math
+    title: "Proof Techniques"
+    tier: 0
+    nodeType: foundation
+    prereqs: [M0.1]
+    objectives:
+      - "Execute direct proofs, contrapositive, and contradiction"
+      - "Construct mathematical induction proofs with robust base cases"
+    primer: "A mathematical proof is an irrefutable deduction from axioms. Contrapositive leverages the equivalence (P => Q) <=> (¬Q => ¬P). Contradiction assumes ¬P and derives a falsehood. Induction establishes a domino chain across the natural numbers."
+    resources:
+      - title: "MIT OCW 6.042J: Mathematics for Computer Science - Proofs"
+        url: "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/"
+        description: "Standard rigorous introduction to proof methods."
+        estMinutes: 30
+    hooks:
+      - "How does mathematical induction guarantee loop invariants in verified software?"
+    bridgeCandidates: [B-induction-loop-invariants]
+
+  - id: M2.5
+    domain: math
+    title: "Vectors & Matrices"
+    tier: 2
+    nodeType: foundation
+    prereqs: [M0.1]
+    objectives:
+      - "Understand vectors as geometric displacements and algebraic tuples"
+      - "Perform matrix multiplication as composition of linear transformations"
+    primer: "Matrices are not mere spreadsheets of numbers; they are active geometric operators that stretch, rotate, and sheer space. Matrix multiplication AB represents applying transformation B followed by transformation A."
+    resources:
+      - title: "3Blue1Brown - Essence of Linear Algebra"
+        url: "https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab"
+        description: "The gold standard visual intuition for linear transformations."
+        estMinutes: 20
+    hooks:
+      - "How do 3D graphics engines transform millions of vertices in nanoseconds?"
+
+  - id: M2.6
+    domain: math
+    title: "Linear Systems & Gaussian Elimination"
+    tier: 2
+    nodeType: skill
+    prereqs: [M2.5]
+    objectives:
+      - "Solve linear systems using row operations and echelon forms"
+      - "Characterize existence and uniqueness of solutions via pivot columns"
+    primer: "A system Ax = b asks: which linear combination of the columns of A produces vector b? Gaussian elimination systematically reduces [A|b] to row echelon form using elementary row operations without altering the solution space."
+    resources:
+      - title: "Gilbert Strang - MIT 18.06 Linear Algebra Lecture 2"
+        url: "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"
+        description: "Classic lecture on elimination with matrices."
+        estMinutes: 40
+    hooks:
+      - "Why does computing robot arm joint equilibrium reduce to solving Ax = b?"
+
+  - id: M2.8
+    domain: math
+    title: "Linear Maps, Rank & Nullspace"
+    tier: 2
+    nodeType: skill
+    prereqs: [M2.6]
+    objectives:
+      - "Compute the nullspace (kernel) and column space (image) of a matrix"
+      - "State and apply the Rank-Nullity Theorem: rank(T) + nullity(T) = dim(V)"
+    primer: "A linear transformation T: V -> W preserves vector addition and scalar multiplication. The nullspace contains all inputs collapsed to zero; the column space contains all possible outputs. The Rank-Nullity theorem guarantees that dimension is conserved."
+    resources:
+      - title: "Linear Algebra Done Right - Axler Chapter 3"
+        url: "https://linear.axler.net/"
+        description: "Coordinate-free conceptual perspective on linear maps."
+        estMinutes: 35
+    hooks:
+      - "When a robotic arm loses a degree of freedom (singularity), which subspace gains dimension?"
+
+  - id: M2.9
+    domain: math
+    title: "Determinants"
+    tier: 2
+    nodeType: skill
+    prereqs: [M2.8]
+    objectives:
+      - "Compute determinants via cofactor expansion and row operations"
+      - "Interpret det(A) geometrically as signed volume scaling factor"
+    primer: "The determinant det(A) measures how much a transformation scales volume. In 2D, it is the signed area of the unit square after transformation; in 3D, signed volume. A determinant of zero means space has collapsed to a lower dimension, making the matrix non-invertible."
+    resources:
+      - title: "3Blue1Brown - The Determinant"
+        url: "https://www.3blue1brown.com/lessons/determinant"
+        description: "Visual exploration of volume scaling."
+        estMinutes: 15
+    hooks:
+      - "Why does the change-of-variables formula in multivariable calculus require the Jacobian determinant?"
+
+  - id: M2.10
+    domain: math
+    title: "Eigenvalues & Diagonalisation"
+    tier: 2
+    nodeType: skill
+    prereqs: [M2.9, M2.8]
+    objectives:
+      - "Compute eigenvalues and eigenvectors via the characteristic equation det(A - λI) = 0"
+      - "Interpret eigenvectors geometrically as invariant directions"
+      - "Diagonalise matrices A = PDP^-1 to compute high matrix powers A^k"
+    primer: "Most vectors change direction when multiplied by a matrix A. Eigenvectors are the privileged directions that only get stretched by a factor λ: Av = λv. In the eigenvector basis, the transformation is purely diagonal, decoupling complex coupled systems."
+    resources:
+      - title: "Gilbert Strang - MIT 18.06 Eigenvalues and Eigenvectors"
+        url: "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/resources/lecture-21-eigenvalues-and-eigenvectors/"
+        description: "Intuitive foundation of eigenvectors."
+        estMinutes: 45
+    hooks:
+      - "Why do Google PageRank and the resonant frequencies of bridges both depend on eigenvalues?"
+    bridgeCandidates: [B-eig-pca, B-eig-stability-robot]
+
+  - id: M2.12
+    domain: math
+    title: "Singular Value Decomposition (SVD) & PCA"
+    tier: 2
+    nodeType: skill
+    prereqs: [M2.10]
+    objectives:
+      - "Decompose any matrix into A = U Σ V^T"
+      - "Apply SVD to low-rank approximation and Principal Component Analysis"
+    primer: "While diagonalisation requires square matrices and independent eigenvectors, SVD works on any rectangular matrix. It identifies orthonormal bases for the domain and codomain such that the matrix acts purely as coordinate stretching along principal axes."
+    resources:
+      - title: "Steve Brunton - Singular Value Decomposition (SVD)"
+        url: "https://www.youtube.com/watch?v=gXbThCXjZFM"
+        description: "Clear data-driven applied view of SVD and dimensionality reduction."
+        estMinutes: 30
+    hooks:
+      - "How do computer vision models compress high-dimensional facial images into 50 eigenfaces?"
+
+  # === COMPUTER SCIENCE (CORE) ===
+  - id: C0.1
+    domain: cs
+    title: "Programming Fundamentals (Python)"
+    tier: 0
+    nodeType: foundation
+    prereqs: []
+    objectives:
+      - "Master control flow, functions, recursion, and core data types"
+      - "Write idiomatic, modular, and cleanly tested Python functions"
+    primer: "Programming is the precise expression of algorithmic thought. In Python, functions are first-class citizens, duck-typing allows flexibility, and concise idioms (list comprehensions, generators) express complex transformations with high clarity."
+    resources:
+      - title: "Python Official Tutorial"
+        url: "https://docs.python.org/3/tutorial/"
+        description: "Official guide to Python syntax and structures."
+        estMinutes: 30
+    hooks:
+      - "How does Python handle memory references under the hood?"
+
+  - id: C1.1
+    domain: cs
+    title: "Data Structures (Arrays, Linked Lists, Hash Maps, Trees)"
+    tier: 1
+    nodeType: foundation
+    prereqs: [C0.1]
+    objectives:
+      - "Implement arrays, linked lists, hash tables, heaps, and binary search trees"
+      - "Analyze memory layout and cache locality trade-offs"
+    primer: "Data structures organize information to enable efficient algorithmic operations. Contiguous memory (arrays) optimizes cache hits, while pointer-based structures (trees, graphs) provide dynamic flexibility at the expense of memory overhead."
+    resources:
+      - title: "CS50 - Data Structures"
+        url: "https://cs50.harvard.edu/"
+        description: "Foundational visual understanding of memory allocation and pointer data structures."
+        estMinutes: 45
+    hooks:
+      - "Why is traversing a contiguous array up to 50x faster than a linked list due to CPU L1 cache lines?"
+
+  - id: C1.3
+    domain: cs
+    title: "Complexity Analysis (Big-O, Recurrences)"
+    tier: 1
+    nodeType: skill
+    prereqs: [C1.1]
+    objectives:
+      - "Derive asymptotic time and space bounds using Big-O, Big-Omega, Big-Theta"
+      - "Solve divide-and-conquer recurrence relations via the Master Theorem"
+    primer: "Asymptotic complexity evaluates how resource usage scales as problem size n grows toward infinity. It abstracts hardware variance to reveal fundamental mathematical efficiency barriers."
+    resources:
+      - title: "MIT 6.006 - Introduction to Algorithms"
+        url: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/"
+        description: "Formal asymptotic notation and recurrence analysis."
+        estMinutes: 40
+    hooks:
+      - "Why can an O(n log n) algorithm process a trillion items in hours while an O(n^2) algorithm takes 30,000 years?"
+
+  - id: C1.4
+    domain: cs
+    title: "Graph Algorithms (BFS, DFS, Dijkstra, A*)"
+    tier: 1
+    nodeType: skill
+    prereqs: [C1.3]
+    objectives:
+      - "Traverse graphs using BFS (queue) and DFS (stack/recursion)"
+      - "Find shortest paths with Dijkstra's algorithm and heuristic A* search"
+    primer: "Graphs model relational topology. BFS finds shortest paths in unweighted graphs by expanding uniform concentric frontiers. Dijkstra generalizes this using a priority queue for positive edge weights. A* injects an admissible heuristic h(n) to direct exploration toward the goal."
+    resources:
+      - title: "Red Blob Games - Introduction to A*"
+        url: "https://www.redblobgames.com/pathfinding/a-star/introduction.html"
+        description: "The definitive interactive visual guide to pathfinding."
+        estMinutes: 25
+    hooks:
+      - "How does an autonomous mobile robot plan obstacle-free routes in a factory within milliseconds?"
+    bridgeCandidates: [B-ant-graph, B-robot-planning]
+
+  - id: C1.5
+    domain: cs
+    title: "Dynamic Programming"
+    tier: 1
+    nodeType: skill
+    prereqs: [C1.3]
+    objectives:
+      - "Identify optimal substructure and overlapping subproblems"
+      - "Formulate Bellman equations and implement memoization / tabulation"
+    primer: "Dynamic programming trades space for time by caching solutions to overlapping subproblems. If a global optimum is composed of optimal solutions to subproblems, the problem can be broken down recursively into a DAG of state transitions."
+    resources:
+      - title: "MIT 6.006 - Dynamic Programming"
+        url: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-15-dynamic-programming-part-1-srs-dp-fibonacci-shortest-paths/"
+        description: "Systematic 5-step framework for DP."
+        estMinutes: 45
+    hooks:
+      - "How does dynamic programming power both biological sequence alignment and robot trajectory optimization?"
+    bridgeCandidates: [B-optimal-foraging-dp]
+
+  # === FRONTIER: ROBOTICS ===
+  - id: R1
+    domain: robotics
+    title: "Rigid-Body Transforms (SO(3), SE(3))"
+    tier: 1
+    nodeType: skill
+    prereqs: [M2.5]
+    objectives:
+      - "Represent 3D rotations via rotation matrices, Euler angles, and unit quaternions"
+      - "Compose homogeneous transformation matrices in SE(3) to relate reference frames"
+    primer: "Robotics is the science of spatial coordinate transformations. A rigid body has 6 degrees of freedom (3 position, 3 orientation). Homogeneous 4x4 transformation matrices in SE(3) combine rotation and translation into a single unified matrix multiplication."
+    resources:
+      - title: "Modern Robotics - Lynch & Park, Chapter 3"
+        url: "http://modernrobotics.org"
+        description: "The definitive textbook on screw theory and modern robot kinematics."
+        estMinutes: 50
+    hooks:
+      - "Why do spacecraft and drones use quaternions instead of Euler angles to avoid gimbal lock?"
+
+  - id: R2
+    domain: robotics
+    title: "Forward & Inverse Kinematics"
+    tier: 2
+    nodeType: skill
+    prereqs: [R1]
+    objectives:
+      - "Compute end-effector pose from joint angles (Forward Kinematics)"
+      - "Solve the inverse problem: finding joint angles to achieve a desired Cartesian target"
+    primer: "Forward kinematics computes the hand position from the angles of all robot joints using geometric chains. Inverse kinematics reverses this: given a target point in 3D space, which angles must the motors turn to? It often has multiple solutions, singular configurations, or no physical solution."
+    resources:
+      - title: "Modern Robotics Chapter 4 & 6"
+        url: "http://modernrobotics.org"
+        description: "Kinematic chains and numerical inverse kinematics."
+        estMinutes: 45
+    hooks:
+      - "How does an insect or robot leg calculate joint bends to place its foot precisely on uneven rock?"
+
+  - id: R4
+    domain: robotics
+    title: "Feedback Control (PID to State-Space)"
+    tier: 2
+    nodeType: capstone
+    prereqs: [M2.10, R1]
+    objectives:
+      - "Tune proportional-integral-derivative (PID) feedback loops"
+      - "Model dynamical systems in state-space form dx/dt = Ax + Bu"
+    primer: "Open-loop commands drift due to friction and disturbances. Feedback control continuously measures the error e(t) = target - actual and applies correction proportional to the current error (P), accumulated past error (I), and anticipated rate of change (D)."
+    resources:
+      - title: "Brian Douglas - Control Systems Lectures"
+        url: "https://www.youtube.com/c/BrianBDouglas"
+        description: "Intuitive explanations of transfer functions and PID tuning."
+        estMinutes: 30
+    hooks:
+      - "How does a self-balancing Segway or quadrotor stay upright despite wind gusts?"
+
+  # === ORBIT: ENTOMOLOGY ===
+  - id: E1
+    domain: entomology
+    title: "Insect Morphology & Body Plan"
+    tier: 1
+    nodeType: skill
+    prereqs: []
+    objectives:
+      - "Identify tagmata: head, thorax (pro, meso, meta), and abdomen"
+      - "Analyze exoskeleton biomechanics, chitin structure, and jointed appendages"
+    primer: "Insects are the most successful animal body plan on Earth. Their bodies are divided into three specialized tagmata: head (sensory/feeding), thorax (locomotor engine with 3 pairs of legs and 2 pairs of wings), and abdomen (visceral organs and reproduction), enclosed in a lightweight chitinous exoskeleton."
+    resources:
+      - title: "Amateur Entomologists' Society - Insect Anatomy"
+        url: "https://www.amentsoc.org/insects/fact-files/"
+        description: "Detailed morphological diagrams of insect structures."
+        estMinutes: 20
+    hooks:
+      - "How do insect joint mechanisms inspire resilient micro-robot flexures?"
+
+  - id: E6
+    domain: entomology
+    title: "Social Insects & Colony Organization"
+    tier: 1
+    nodeType: skill
+    prereqs: [E1]
+    objectives:
+      - "Understand eusociality criteria (cooperative brood care, overlapping generations, caste division)"
+      - "Analyze stigmergy and chemical pheromone trail reinforcement"
+    primer: "An ant colony is a superorganism. With no central leader, thousands of simple agents solve NP-hard routing, climate control, and foraging logistics through local interactions and stigmergy—modifying the environment with pheromones to guide collective action."
+    resources:
+      - title: "E.O. Wilson - The Insect Societies"
+        url: "https://www.hup.harvard.edu/"
+        description: "Foundational text on social insect organization."
+        estMinutes: 30
+    hooks:
+      - "How do ant colonies solve distributed shortest-path problems without any ant knowing the map?"
+    bridgeCandidates: [B-ant-graph]
+
+  # === ORBIT: ASTRONOMY ===
+  - id: A1
+    domain: astronomy
+    title: "Celestial Coordinate Systems & The Sky"
+    tier: 1
+    nodeType: skill
+    prereqs: []
+    objectives:
+      - "Navigate the celestial sphere using Right Ascension (RA) and Declination (Dec)"
+      - "Translate between local horizon coordinates (Alt/Az) and equatorial coordinates"
+    primer: "To map the cosmos, we project the earth's coordinate grid onto the celestial sphere. Right ascension mirrors longitude (measured in hours, minutes, seconds), while declination mirrors latitude (degrees north/south of the celestial equator)."
+    resources:
+      - title: "Crash Course Astronomy - Naked Eye Observations"
+        url: "https://www.youtube.com/watch?v=L-Wtlev6suc"
+        description: "Engaging visual introduction to celestial navigation."
+        estMinutes: 15
+    hooks:
+      - "How did ancient mariners and Apollo astronauts use stellar angles to locate themselves in the void?"
+
+  - id: A2
+    domain: astronomy
+    title: "Celestial Mechanics & Keplerian Orbits"
+    tier: 1
+    nodeType: skill
+    prereqs: [A1]
+    objectives:
+      - "State and apply Kepler's three laws of planetary motion"
+      - "Calculate orbital elements: semimajor axis, eccentricity, period"
+    primer: "Planets orbit in ellipses with the Sun at one focus (1st law). Equal areas are swept in equal times, implying faster velocity at perihelion (2nd law). The square of the orbital period is proportional to the cube of the semimajor axis (3rd law), derived from Newton's inverse-square gravity."
+    resources:
+      - title: "NASA - Kepler's Laws"
+        url: "https://science.nasa.gov/learn/basics-of-space-flight/chapter3-1/"
+        description: "Official orbital mechanics primer."
+        estMinutes: 25
+    hooks:
+      - "Why do interplanetary spacecraft follow curved Hohmann transfer ellipses rather than straight lines?"
+
+  # === ORBIT: HISTORY ===
+  - id: H1
+    domain: history
+    title: "Historical Thinking & Source Criticism"
+    tier: 1
+    nodeType: skill
+    prereqs: []
+    objectives:
+      - "Distinguish primary, secondary, and tertiary sources"
+      - "Evaluate provenance, audience, corroboration, and historical bias"
+    primer: "History is not a passive ledger of dates; it is a critical discipline of evidentiary reconstruction. Source criticism interrogates who wrote a document, why they wrote it, what assumptions they held, and how their testimony corroborates with material archaeology."
+    resources:
+      - title: "Stanford History Education Group - Reading Like a Historian"
+        url: "https://sheg.stanford.edu/"
+        description: "Core methods of primary source analysis."
+        estMinutes: 20
+    hooks:
+      - "How do historians detect deliberate omissions and state propaganda in ancient inscriptions?"
+
+  - id: H8
+    domain: history
+    title: "History of Mathematics & Science"
+    tier: 2
+    nodeType: skill
+    prereqs: [H1]
+    objectives:
+      - "Trace the historical impetus behind the invention of calculus (Newton & Leibniz)"
+      - "Understand the transition from geometric intuition to 19th-century rigor (Cauchy, Weierstrass)"
+    primer: "Mathematical concepts do not descend from the heavens fully formed; they are forged to solve pressing physical dilemmas. Calculus arose directly from 17th-century astronomy and ballistics: the need to compute instantaneous velocity and planetary tangents."
+    resources:
+      - title: "MacTutor History of Mathematics Archive"
+        url: "https://mathshistory.st-andrews.ac.uk/"
+        description: "Extensive scholarly archive of mathematical development."
+        estMinutes: 30
+    hooks:
+      - "Why did Newton conceal his calculus discoveries in anagrams for over twenty years?"
+
+  # === ORBIT: PSYCHOLOGY ===
+  - id: Y3
+    domain: psychology
+    title: "Sensation, Perception & Feature Detection"
+    tier: 1
+    nodeType: skill
+    prereqs: []
+    objectives:
+      - "Examine sensory transduction and receptive fields in the visual cortex"
+      - "Connect biological edge detection (Hubel & Wiesel) to convolutional filters"
+    primer: "Perception is not a passive photograph; it is an active inferential reconstruction. The visual system decomposes light into primal visual features—oriented edges, contrast gradients, and motion vectors—via receptive fields in area V1."
+    resources:
+      - title: "Nobel Prize in Medicine 1981 - Hubel & Wiesel"
+        url: "https://www.nobelprize.org/prizes/medicine/1981/hubel/lecture/"
+        description: "Seminal discovery of visual cortical architecture."
+        estMinutes: 25
+    hooks:
+      - "Why does a modern Convolutional Neural Network (CNN) learn the exact same Gabor edge filters found in human V1?"
+
+  - id: Y4
+    domain: psychology
+    title: "Learning, Memory & The Spacing Effect"
+    tier: 1
+    nodeType: skill
+    prereqs: [Y3]
+    objectives:
+      - "Analyze the Ebbinghaus forgetting curve, consolidation, and retrieval practice"
+      - "Examine how spaced repetition algorithms (FSRS) model human memory stability"
+    primer: "Retrieval is a memory modifier: testing yourself on a concept strengthens its neural representation far more than passive re-reading. The spacing effect demonstrates that expanding intervals between retrievals forces durable synaptic consolidation."
+    resources:
+      - title: "Make It Stick: The Science of Successful Learning"
+        url: "https://www.retrievalpractice.org/"
+        description: "Summary of cognitive psychology research on deliberate retrieval."
+        estMinutes: 20
+    hooks:
+      - "Why does struggling to recall an answer right before you forget it produce 300% greater retention than studying while fresh?"
+
+edges:
+  - fromId: M0.1
+    toId: M0.2
+    kind: prereq
+  - fromId: M0.1
+    toId: M2.5
+    kind: prereq
+  - fromId: M2.5
+    toId: M2.6
+    kind: prereq
+  - fromId: M2.6
+    toId: M2.8
+    kind: prereq
+  - fromId: M2.8
+    toId: M2.9
+    kind: prereq
+  - fromId: M2.9
+    toId: M2.10
+    kind: prereq
+  - fromId: M2.8
+    toId: M2.10
+    kind: prereq
+  - fromId: M2.10
+    toId: M2.12
+    kind: prereq
+  - fromId: C0.1
+    toId: C1.1
+    kind: prereq
+  - fromId: C1.1
+    toId: C1.3
+    kind: prereq
+  - fromId: C1.3
+    toId: C1.4
+    kind: prereq
+  - fromId: C1.3
+    toId: C1.5
+    kind: prereq
+  - fromId: M2.5
+    toId: R1
+    kind: prereq
+  - fromId: R1
+    toId: R2
+    kind: prereq
+  - fromId: M2.10
+    toId: R4
+    kind: prereq
+  - fromId: R1
+    toId: R4
+    kind: prereq
+  - fromId: E1
+    toId: E6
+    kind: prereq
+  - fromId: A1
+    toId: A2
+    kind: prereq
+  - fromId: H1
+    toId: H8
+    kind: prereq
+  - fromId: Y3
+    toId: Y4
+    kind: prereq

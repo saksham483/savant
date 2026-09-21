@@ -1,0 +1,19 @@
+{
+  "name": "@savant/planner",
+  "version": "0.1.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@savant/core": "workspace:*",
+    "@savant/graph": "workspace:*",
+    "@savant/learner": "workspace:*",
+    "@savant/srs": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}

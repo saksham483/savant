@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  verifier:
+    build:
+      context: .
+      dockerfile: services/verifier/Dockerfile
+    ports:
+      - "8001:8001"
+    environment:
+      - PYTHONUNBUFFERED=1
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - VERIFIER_URL=http://verifier:8001
+      - GEMINI_MODEL=gemini-3.8-flash
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    depends_on:
+      - verifier

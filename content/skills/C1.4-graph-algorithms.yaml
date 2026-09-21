@@ -1,0 +1,81 @@
+id: C1.4
+domain: cs
+title: "Graph Algorithms (BFS, DFS, Dijkstra, A*)"
+tier: 1
+prereqs: [C1.3]
+soft_prereqs: []
+objectives:
+  - "Traverse graphs using BFS (queue) and DFS (stack/recursion)"
+  - "Compute single-source shortest paths on weighted graphs with Dijkstra"
+  - "Direct search using admissible heuristics with A*"
+primer: |
+  A graph G = (V, E) encodes relationships between entities. 
+  Breadth-First Search (BFS) explores all neighbors at distance d before moving to distance d+1, naturally discovering shortest paths in unweighted graphs in O(V + E).
+  Dijkstra's algorithm extends this to non-negative edge weights by employing a min-priority queue to greedily extract the closest unvisited vertex, achieving O((V + E) log V).
+  A* enhances Dijkstra by adding an admissible heuristic h(n) <= h*(n): f(n) = g(n) + h(n), focusing exploration toward the goal.
+resources:
+  - title: "Red Blob Games - A* Pathfinding"
+    url: "https://www.redblobgames.com/pathfinding/a-star/introduction.html"
+    description: "Visualizations of BFS, Dijkstra, and A*."
+    estMinutes: 20
+hooks:
+  - "How do GPS routing engines search continental road networks in 5 milliseconds?"
+bridge_candidates: [B-ant-graph]
+
+items:
+  - id: item-c14-01
+    familyId: bfs-complexity
+    format: computational
+    difficulty: 0.1
+    prompt: "What is the time complexity of Breadth-First Search (BFS) on an adjacency list representation of a graph with V vertices and E edges? Enter in standard Big-O notation like O(V + E)."
+    answerKey:
+      type: "exact"
+      value: "O(V + E)"
+    solution: "Each vertex is enqueued and dequeued at most once (O(V)), and each edge incident to a vertex is scanned when exploring its adjacency list (O(E)), giving total time O(V + E)."
+    hints:
+      - "How many times does each vertex enter and leave the queue?"
+      - "How many times are edges examined across all adjacency lists?"
+      - "Sum the vertex operations and edge operations."
+      - "The asymptotic bound is linear in vertices plus edges."
+      - "O(V + E)"
+    provenance: curated
+    verifiedBy: ["curated-store"]
+    status: active
+    createdAt: "2026-09-20T21:00:00Z"
+
+  - id: item-c14-02
+    familyId: write-code-bfs
+    format: write_code
+    difficulty: 0.4
+    prompt: "Implement a function `shortest_path_length(graph, start, target)` using BFS in Python. `graph` is a dict mapping node to list of neighbors. Return the minimum number of edges from `start` to `target`, or -1 if unreachable."
+    scaffoldData:
+      starterCode: |
+        from collections import deque
+
+        def shortest_path_length(graph: dict, start: str, target: str) -> int:
+            # Your code here
+            pass
+    answerKey:
+      type: "code-tests"
+      value: "def shortest_path_length(graph, start, target):\n    if start == target: return 0\n    queue = deque([(start, 0)])\n    visited = {start}\n    while queue:\n        curr, dist = queue.popleft()\n        if curr == target: return dist\n        for nxt in graph.get(curr, []):\n            if nxt not in visited:\n                visited.add(nxt)\n                queue.append((nxt, dist + 1))\n    return -1"
+      testCases:
+        - name: "Direct path"
+          input: [{"A": ["B"], "B": ["C"], "C": []}, "A", "C"]
+          expected: 2
+        - name: "Unreachable"
+          input: [{"A": ["B"], "B": [], "C": []}, "A", "C"]
+          expected: -1
+        - name: "Start is target"
+          input: [{"A": ["B"]}, "A", "A"]
+          expected: 0
+    solution: "Standard BFS using a queue with (node, distance) tuples and a visited set to avoid cycles."
+    hints:
+      - "Initialize a queue with (start, 0) and a visited set containing start."
+      - "Pop from the left of the queue."
+      - "If current node is target, return distance."
+      - "For each unvisited neighbor, mark as visited and enqueue with dist + 1."
+      - "If the queue empties without reaching target, return -1."
+    provenance: generator
+    verifiedBy: ["pytest"]
+    status: active
+    createdAt: "2026-09-20T21:00:00Z"

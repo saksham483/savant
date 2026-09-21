@@ -1,0 +1,63 @@
+bridges:
+  - id: B-ant-graph
+    nodeA: E6
+    nodeB: C1.4
+    kind: shared-structure
+    title: "Ant Foraging ↔ Graph Shortest Paths"
+    insight: "Ant colony foraging is a decentralized shortest-path algorithm. Through positive feedback (reinforcing successful pheromone trails) and evaporation (decaying obsolete routes), ants converge onto minimal paths without any global graph representation."
+    challenge:
+      prompt: "Sketch the pheromone update equation: τ_ij(t+1) = (1 - ρ)·τ_ij(t) + Σ Δτ_ij. Which parameter prevents ants from getting permanently stuck in suboptimal loops?"
+      deliverableType: text
+      starterHint: "Think about the role of the evaporation coefficient ρ."
+    explainPrompt: "How does ant colony trail reinforcement mathematically mirror edge relaxation and heuristic search in graph algorithms?"
+    unlockCondition:
+      minTierNodeA: 2
+      minTierNodeB: 2
+    origin: seed
+
+  - id: B-eig-pca
+    nodeA: M2.10
+    nodeB: M2.12
+    kind: shared-structure
+    title: "Eigenvalues ↔ Principal Component Analysis (PCA)"
+    insight: "Finding the principal axes of maximum variance in high-dimensional data is identical to finding the eigenvectors of the empirical covariance matrix. The dominant eigenvalue tells you exactly how much statistical variance is preserved along that axis."
+    challenge:
+      prompt: "Given covariance matrix Σ = (1/n) X^T X, write the optimization problem that yields the first principal component as an eigenvalue equation."
+      deliverableType: math
+      starterHint: "Maximize v^T Σ v subject to ||v||^2 = 1 using Lagrange multipliers."
+    explainPrompt: "Why does the direction of greatest statistical variance correspond to the largest eigenvalue of the covariance matrix?"
+    unlockCondition:
+      minTierNodeA: 2
+      minTierNodeB: 2
+    origin: seed
+
+  - id: B-eig-stability-robot
+    nodeA: M2.10
+    nodeB: R4
+    kind: application
+    title: "Eigenvalues ↔ Dynamic Stability in Robotics"
+    insight: "For a linear robot dynamical system dx/dt = Ax, the real parts of the eigenvalues of matrix A determine whether the system is stable, oscillatory, or catastrophically diverging. Negative real parts guarantee asymptotic decay back to equilibrium."
+    challenge:
+      prompt: "If a 2-joint arm controller has system matrix A with eigenvalues λ1 = -2 + 3i and λ2 = -2 - 3i, describe the resulting motion when perturbed from rest."
+      deliverableType: text
+      starterHint: "Examine the real part (-2) vs the imaginary part (±3i)."
+    explainPrompt: "Why do negative real eigenvalues ensure that an autonomous robot returns safely to its setpoint after a physical bump?"
+    unlockCondition:
+      minTierNodeA: 2
+      minTierNodeB: 2
+    origin: seed
+
+  - id: B-human-vision-cv
+    nodeA: Y3
+    nodeB: C1.1
+    kind: method-transfer
+    title: "Biological Receptive Fields ↔ Convolutional Filters"
+    insight: "Hubel and Wiesel discovered that neurons in primate visual cortex V1 fire only in response to oriented bars of light. Fifty years later, convolutional neural networks trained on natural images independently learn identical Gabor edge filters in their first layers."
+    challenge:
+      prompt: "Explain how a 3x3 Sobel edge filter approximates a directional spatial derivative in digital image processing."
+      deliverableType: text
+    explainPrompt: "Why is local spatial feature extraction biologically and computationally superior to processing raw pixels or photons globally?"
+    unlockCondition:
+      minTierNodeA: 2
+      minTierNodeB: 2
+    origin: seed

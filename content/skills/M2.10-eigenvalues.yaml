@@ -1,0 +1,106 @@
+id: M2.10
+domain: math
+title: "Eigenvalues & Diagonalisation"
+tier: 2
+prereqs: [M2.9, M2.8]
+soft_prereqs: []
+objectives:
+  - "Compute eigenvalues/eigenvectors of 2x2 matrices"
+  - "Explain eigenvectors geometrically as invariant directions"
+  - "Diagonalise a matrix and use it to compute matrix powers A^n"
+primer: |
+  Most vectors change direction when transformed by a matrix A. Eigenvectors v are the exceptional non-zero vectors whose direction is invariant under the transformation:
+  
+  A v = λ v
+  
+  where λ is the scalar eigenvalue.
+  To solve this, we rearrange to (A - λI)v = 0. Because v ≠ 0, the operator (A - λI) must have a non-trivial nullspace, meaning its determinant must vanish:
+  
+  det(A - λI) = 0
+  
+  This characteristic polynomial gives the eigenvalues. Once eigenvalues are known, substituting them back into (A - λI)v = 0 yields the eigenspaces.
+resources:
+  - title: "3Blue1Brown - Essence of Linear Algebra: Eigenvectors and Eigenvalues"
+    url: "https://www.youtube.com/watch?v=PFDu9oVAE-g"
+    description: "Visual intuition for invariant axes and stretching."
+    estMinutes: 17
+misconceptions:
+  - id: eig-01
+    text: "Every square matrix of size n has n distinct eigenvalues and independent eigenvectors."
+  - id: eig-02
+    text: "The zero vector can be an eigenvector."
+hooks:
+  - "Why do Google PageRank and the resonant frequencies of skyscrapers both depend on eigenvalues?"
+bridge_candidates: [B-eig-pca, B-eig-stability-robot]
+
+items:
+  - id: item-m210-01
+    familyId: eig-compute-2x2
+    format: computational
+    difficulty: 0.2
+    prompt: "Find the eigenvalues of the matrix \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}. Enter the values as a comma-separated list."
+    latexPrompt: "\\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}"
+    answerKey:
+      type: "set-of-numbers"
+      value: [1, 3]
+    solution: "The characteristic equation is det(A - \\lambda I) = (2-\\lambda)^2 - 1 = 0 \\implies (2-\\lambda) = \\pm 1 \\implies \\lambda \\in \\{1, 3\\}."
+    hints:
+      - "What is the characteristic equation for any 2x2 matrix A?"
+      - "Set det(A - λI) = 0 and expand the 2x2 determinant (a-λ)(d-λ) - bc."
+      - "Expand (2 - λ)(2 - λ) - 1*1 = 0 to get λ² - 4λ + 3 = 0."
+      - "Factor the quadratic λ² - 4λ + 3 into (λ - 1)(λ - 3) = 0."
+      - "The eigenvalues are λ = 1 and λ = 3."
+    provenance: generator
+    verifiedBy: ["sympy"]
+    status: active
+    createdAt: "2026-09-20T21:00:00Z"
+
+  - id: item-m210-02
+    familyId: eig-proof-scaffold
+    format: proof_scaffold
+    difficulty: 0.6
+    prompt: "Arrange the following steps in logical order to prove: 'If v is an eigenvector of A with eigenvalue λ, then v is an eigenvector of A² with eigenvalue λ²'."
+    scaffoldData:
+      steps:
+        - id: step-1
+          text: "Start with the given eigenvector equation: A v = λ v."
+        - id: step-2
+          text: "Multiply both sides on the left by matrix A: A(A v) = A(λ v)."
+        - id: step-3
+          text: "Apply associativity on the left and scalar linearity on the right: A² v = λ(A v)."
+        - id: step-4
+          text: "Substitute the identity A v = λ v into the right side: A² v = λ(λ v) = λ² v."
+        - id: step-5
+          text: "Conclude that A² v = λ² v with v ≠ 0, so v is an eigenvector of A² with eigenvalue λ²."
+    answerKey:
+      type: "ordered-sequence"
+      value: ["step-1", "step-2", "step-3", "step-4", "step-5"]
+    solution: "Applying A repeatedly leverages linearity A(λv) = λ(Av) = λ(λv) = λ²v."
+    hints:
+      - "Always state the initial hypothesis first."
+      - "What algebraic operation introduces A² on the left hand side?"
+      - "Group matrix multiplication using associativity: A(Av) = A²v."
+      - "Use the fact that scalars commute with matrices: A(λv) = λ(Av)."
+      - "The correct sequence is step-1 -> step-2 -> step-3 -> step-4 -> step-5."
+    provenance: curated
+    verifiedBy: ["formal-proof-checker"]
+    status: active
+    createdAt: "2026-09-20T21:00:00Z"
+
+  - id: item-m210-03
+    familyId: eig-explain-back
+    format: explain_back
+    difficulty: 0.8
+    prompt: "Explain why an eigenvector must correspond to a non-trivial nullspace of (A - λI), and why that forces det(A - λI) = 0."
+    answerKey:
+      type: "rubric"
+      rubricCriteria:
+        - "Mentions that (A - λI)v = 0 is a rearrangement of Av = λv"
+        - "Notes that eigenvectors must be non-zero (v ≠ 0) by definition"
+        - "Explains that a non-zero vector in the nullspace implies the matrix is singular / non-invertible"
+        - "Connects singularity of a matrix to det = 0 (collapsing of geometric volume)"
+    solution: "Av = λv rearranges to (A - λI)v = 0. Since v ≠ 0, (A - λI) sends a non-zero vector to zero, meaning its kernel/nullspace is non-trivial. A linear map with a non-trivial kernel is non-invertible and collapses at least one dimension, which means its signed volume scaling factor—the determinant—must be exactly zero."
+    provenance: curated
+    verifiedBy: ["curated-store"]
+    status: active
+    createdAt: "2026-09-20T21:00:00Z"

@@ -1,0 +1,61 @@
+id: M0.1
+domain: math
+title: "Logic & Quantifiers"
+tier: 0
+prereqs: []
+soft_prereqs: []
+objectives:
+  - "Master propositional logic, truth tables, and equivalences"
+  - "Express mathematical claims rigorously using universal and existential quantifiers"
+primer: |
+  Logic governs all mathematical inference. A proposition P is a declarative statement that is either True or False.
+  The conditional P => Q means "if P is true, then Q must be true." Notice that if P is False, the implication P => Q is vacuously True!
+  The negation of a universal claim ¬(∀x P(x)) is logically equivalent to an existential claim ∃x (¬P(x)).
+resources:
+  - title: "Stanford Encyclopedia of Philosophy - Classical Logic"
+    url: "https://plato.stanford.edu/entries/logic-classical/"
+    description: "Rigorous philosophical foundations of truth tables and entailment."
+    estMinutes: 20
+hooks:
+  - "Why is vacuum truth crucial when defining subsets of the empty set?"
+
+items:
+  - id: item-m01-01
+    familyId: logic-negation
+    format: computational
+    difficulty: -0.8
+    prompt: "What is the logical negation of the statement: 'Every continuous function is differentiable'?"
+    answerKey:
+      type: "multiple-choice"
+      value: "There exists a continuous function that is not differentiable."
+    solution: "The statement has the form ∀f (Cont(f) => Diff(f)). Its negation is ¬(∀f (Cont(f) => Diff(f))) ≡ ∃f ¬(Cont(f) => Diff(f)) ≡ ∃f (Cont(f) ∧ ¬Diff(f)). Thus, there exists at least one continuous function that is not differentiable (e.g. Weierstrass function, or f(x) = |x| at 0)."
+    hints:
+      - "Identify the quantifier: 'Every' is a universal quantifier (∀)."
+      - "What is the dual of a universal quantifier under negation?"
+      - "Negating ∀x P(x) yields ∃x ¬P(x)."
+      - "What is the negation of P => Q?"
+      - "The negation is: There exists a continuous function that is not differentiable."
+    provenance: curated
+    verifiedBy: ["curated-store"]
+    status: active
+    createdAt: "2026-09-20T21:00:00Z"
+
+  - id: item-m01-02
+    familyId: logic-truth-table
+    format: computational
+    difficulty: -0.5
+    prompt: "If proposition P is False and proposition Q is False, evaluate the truth value of the implication P => Q. Enter True or False."
+    answerKey:
+      type: "exact"
+      value: "True"
+    solution: "In classical logic, P => Q is defined as ¬P ∨ Q. Since P is False, ¬P is True, so ¬P ∨ Q is True. An implication with a false antecedent is vacuously true."
+    hints:
+      - "Look at the definition of implication: P => Q."
+      - "When is an implication P => Q false?"
+      - "An implication is ONLY false when the hypothesis P is True and conclusion Q is False."
+      - "Since hypothesis P is False, what must the truth value be?"
+      - "The truth value is True."
+    provenance: curated
+    verifiedBy: ["curated-store"]
+    status: active
+    createdAt: "2026-09-20T21:00:00Z"
